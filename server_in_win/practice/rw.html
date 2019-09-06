@@ -1,0 +1,38 @@
+﻿<!DOCTYPE > 
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>文件的读写</title> 
+</head> 
+
+<body> 
+<button onclick='getFile()'>读取文本文件</button>
+<div id="readFile"></div> 
+
+<button onclick="writeFile()">编写文本文件</button>
+
+<script language="javascript"> 
+function getFile(){
+    var fso, ts, s ; 
+    var ForReading = 1; 
+
+    fso = new ActiveXObject("Scripting.FileSystemObject"); 
+    ts = fso.OpenTextFile("d:\\testfile.txt", ForReading); 
+    s = ts.ReadLine(); 
+    document.getElementById("readFile").innerHTML=s; 
+    ts.close();
+}
+
+function writeFile(){
+    var fso, ts, s;
+    var ForWriting = 1;
+
+    fso = new ActiveXObject("Scripting.FileSystemObject");
+    ts = fso.CreateTextFile("d:\\testfile.txt", ForWriting);
+    ts.writeline("正在写入文本文件");
+    ts.close();
+}
+</script> 
+
+</body> 
+</html> 

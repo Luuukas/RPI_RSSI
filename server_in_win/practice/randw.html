@@ -1,0 +1,34 @@
+<div id="file-div">
+    <input id="file" type="file" name="inputfile"
+    accept="text/plain, text/css, text/html, text/javascript, text/markdown" />
+    <textarea name="filereader" placeholder="请选择txt、js、css或html文件，文件内容会被自动读取" disabled></textarea>
+    <div id="readFile"></div> 
+
+    <form id="writefile" name="input" action="html_form_action.php" method="get">
+            输入文本内容: <input type="text" name="user">
+            <input type="submit" value="Submit">
+            </form>
+</div>
+<script>
+
+
+var inputFile  = document.getElementById("file"); //input file
+inputFile.onchange = function(){
+    var file = this.files[0];
+    if(!!file){
+        //读取本地文件，以gbk编码方式输出
+        var reader = new FileReader();
+        reader.readAsText(file,"gbk");
+        reader.onload = function(){
+            //读取完毕后输出结果
+            console.log(this.result);
+            document.getElementById("readFile").innerHTML=this.result; 
+        }
+    }
+}
+
+
+var wfile = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
+saveAs(wfile);
+
+</script>
